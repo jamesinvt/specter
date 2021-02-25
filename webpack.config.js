@@ -57,12 +57,12 @@ module.exports = {
           }
         },
       },
-      '/t/p': {
-          target: 'https://image.tmdb.org',
-          changeOrigin: true,
-          compress: true,
+    //   '/t/p': {
+    //       target: 'https://image.tmdb.org',
+    //       changeOrigin: true,
+    //       compress: true,
           
-      }
+    //   }
     },
   },
 }

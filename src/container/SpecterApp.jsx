@@ -3,6 +3,8 @@ import Movie from '../component/Movie';
 import Panel from '../component/Panel';
 import HelloWorld from '../component/HelloWorld';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { Container }  from '@material-ui/core/';
+
 const SpecterApp = () => {
     const fetchTest = async () => {
         const response = await fetch('/movie');
@@ -15,7 +17,7 @@ const SpecterApp = () => {
     const [data, setData] = useState({});
 
     useEffect(async () => {
-        // const response = await fetchTest();
+        // const response = await fetchTest(); 
         // console.log(response.data)
         // setData(response.data)
         
@@ -23,11 +25,11 @@ const SpecterApp = () => {
     const testImg = "/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.png"
     return (
         <Router>
-            <div>
+            <Container width={1}>
                 <h3>Specter says hello</h3>
                 <Panel panel="popular" group="streaming" />
-                {/* <Panel data-panel="trending" group="today" /> */}
-            </div>
+                <Panel panel="trending" group="day" />
+            </Container>
         </Router>
     );
 };
