@@ -1,8 +1,7 @@
-
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 // import { Provider } from "react-redux";
-import App from "./container/SpecterApp";
+import App from './container/SpecterApp';
 // import store from './store'
 
 // const app = () => {
@@ -11,4 +10,4 @@ import App from "./container/SpecterApp";
 //     );
 // }
 
-ReactDOM.render(<App/>, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById('root'));
