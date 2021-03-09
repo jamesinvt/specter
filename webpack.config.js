@@ -47,14 +47,13 @@ module.exports = {
 		proxy: {
 			'/remote': {
 				target: 'http://localhost:3000',
-				pathRewrite: {
-					'^/remote': '',
-				},
-				bypass: function (req, res, proxyOptions) {
-					if (req.headers.accept.indexOf('img') !== -1) {
-						console.log(req.headers);
+				bypass(req, res, proxyOptions) {
+					if (req.headers.accept.indexOf('html') !== -1) {
 						return '/index.html';
 					}
+				},
+				pathRewrite: {
+					'^/remote': '',
 				},
 			},
 			//   '/t/p': {
