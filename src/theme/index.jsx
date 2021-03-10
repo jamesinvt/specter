@@ -15,7 +15,7 @@ const darkMode = createMuiTheme({
 			main: '#401033'
 		}
 	},
-  });
+});
 
 const SpecterTheme = (props) => {
 	const { children } = props

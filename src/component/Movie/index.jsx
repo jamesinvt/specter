@@ -11,18 +11,13 @@ import {
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 const useStyles = makeStyles((theme) => ({
-	images: props => ({
-		width: props.imgWidth,
-		height: '200px',
-		borderRadius: '10px',
-		overflow: 'hidden',
-	}),
-	activeImage: {
-		maxWidth: '200px',
-		width: '200px',
+	image: {
+
 		// height: '300px',
 		borderRadius: '10px',
 		overflow: 'hidden',
+		height: '100%',
+		width: '100%'
 	},
 	thumbnailText: {
 		textAlign: 'center',
@@ -31,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Movie = (props) => {
-	const { isActive, item, handleActive, index, imgWidth } = props;
+	const { isActive, item, handleActive, index } = props;
 	const { handleClick } = props
 	const classes = useStyles(props);
 
@@ -44,33 +39,33 @@ const Movie = (props) => {
 		}
 	}, [isActive]);
 	return (
-		<ImageListItem onClick={onClick}>
+		<div onClick={onClick}>
 			<div  className={!isActive ? classes.images : classes.activeImage}>
 				<div style={{position:'relative'}}>
 					<img
-						className={!isActive ? classes.images : classes.activeImage}
+						className={classes.image}
 						src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
 						alt={item.title}
 						loading="lazy"
 					/>
-					<ImageListItemBar
+					{/* <ImageListItemBar
 						actionIcon={
 							<IconButton>
 								<StarBorderIcon />
 							</IconButton>
 						}
 						actionPosition="right"
-					/>
+					/> */}
 				</div>
 				<div>
-					<ImageListItemBar
+					{/* <ImageListItemBar
 						title={item.title}
 						position="below"
 						className={classes.thumbnailText}
-					/>
+					/> */}
 				</div>
 			</div>
-		</ImageListItem>
+		</div>
 	);
 };
 

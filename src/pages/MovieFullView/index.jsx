@@ -1,34 +1,11 @@
 import React from 'react';
 import { Container, Grid, makeStyles } from '@material-ui/core/';
+import Backdrop from '../../component/Backdrop';
 import useFetch from '../../hooks/useFetch';
 
 const useStyles = makeStyles(theme => ({
-	root: {
-	},
 	image: {
 		maxWidth: '120px'
-	},
-	background: {
-		backgroundRepeat: 'no-repeat',
-		backgroundSize: 'auto',
-		backgroundPosition: 'center top',
-		position: 'absolute',
-		height: '100%',
-		width: '100%',
-		zIndex: '-2',
-		marginTop: '-63px',
-		left:0,
-	},
-	gradient: {
-		background:
-			`linear-gradient(360deg, ${theme.palette.background.default} 45%, rgba(255,255,255,0) 100%);`,
-		alignItems: 'flex-end',
-		display: 'flex',
-		position: 'absolute',
-		height: '100%',
-		width: '100%',
-		zIndex: '-1',
-		left:0,
 	},
 }))
 
@@ -60,13 +37,7 @@ const MovieFullView = (props) => {
 							{data.overview}
 						</Grid>
 					</Grid>
-					<div className={classes.gradient} />
-					<div
-						style={{
-							backgroundImage: `url(https://image.tmdb.org/t/p/w780${data.backdrop_path})`,
-						}}
-						className={classes.background}
-					/>
+					<Backdrop image={`https://image.tmdb.org/t/p/w500${data.backdrop_path}`} />
 				</Grid>
 			}
 			
