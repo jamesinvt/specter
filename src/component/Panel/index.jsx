@@ -60,9 +60,8 @@ const Panel = ({ panel, group }) => {
 			<div className={classes.root} ref={target} data-test={panel} >
 				<Carousel gap={12} handleActiveItem={handleCurrentIndexChange} itemWidth={ITEM_WIDTH} selectedItemWidth={ITEM_SELECTED_WIDTH}>
 					{ data && data.results.map((item, index) => (
-						<Link key={item.id} to={`/movie/${item.id}`}>
+						<Link to={`/movie/${item.id}`}>
 							<Movie
-								key={item.id}
 								item={item}
 								isActive={index == currentIndex}
 								handleActive={handleActive}

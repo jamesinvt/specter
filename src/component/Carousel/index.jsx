@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 		position: 'relative',
 		bottom: '100px',
 		overflow: 'hidden',
-		paddingLeft: `${props.gap}px`,
+		padding: 0,
 		gap: `${props.gap}px`
 	}),
 	selectedImage: props => ({
@@ -135,7 +135,7 @@ const Carousel = (props) => {
 				onTouchEnd={handleTouchEnd}
 				style={{
 				transform: `translateX(${
-					movement * -1 + (props.selectedItemWidth / 2) - (currentIndex * props.gap)
+					movement * -1 + (props.selectedItemWidth / 2) - (currentIndex * 12)
 				}px)`}}
 			>
 				{renderChildren()}
