@@ -4,10 +4,7 @@ import Panel from '../../component/Panel';
 
 const Home = () => {
 	return (
-		<Container
-			disableGutters
-			width={1}
-		>
+		<Container disableGutters width={1}>
 			<Panel panel="popular" group="streaming" />
 
 			<Panel panel="trending" group="day" />

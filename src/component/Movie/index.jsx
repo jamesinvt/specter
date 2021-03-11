@@ -12,27 +12,26 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 const useStyles = makeStyles((theme) => ({
 	image: {
-
 		// height: '300px',
 		borderRadius: '10px',
 		overflow: 'hidden',
 		height: '100%',
-		width: '100%'
+		width: '100%',
 	},
 	thumbnailText: {
 		textAlign: 'center',
-		whiteSpace: 'initial'
+		whiteSpace: 'initial',
 	},
 }));
 
 const Movie = (props) => {
 	const { isActive, item, handleActive, index } = props;
-	const { handleClick } = props
+	const { handleClick } = props;
 	const classes = useStyles(props);
 
 	const onClick = () => {
 		handleClick(item, index);
-	}
+	};
 	useEffect(() => {
 		if (isActive) {
 			handleActive(item);
@@ -40,8 +39,8 @@ const Movie = (props) => {
 	}, [isActive]);
 	return (
 		<div onClick={onClick}>
-			<div  className={!isActive ? classes.images : classes.activeImage}>
-				<div style={{position:'relative'}}>
+			<div className={!isActive ? classes.images : classes.activeImage}>
+				<div style={{ position: 'relative' }}>
 					<img
 						className={classes.image}
 						src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}

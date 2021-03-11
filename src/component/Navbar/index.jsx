@@ -33,10 +33,7 @@ const Navigation = () => {
 				>
 					<MenuIcon />
 				</IconButton>
-				<Typography
-					variant="h6"
-					className={classes.title}
-				>
+				<Typography variant="h6" className={classes.title}>
 					News
 				</Typography>
 				<div className={classes.search}>

@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 
 export default (target, options) => {
-	// MIGHT REMOVE BELOW HERE
 	const { once, ...opts } = options;
 	const optsRef = useRef(opts);
 	const intersectedRef = useRef(false);
-	//MIGHT REMOVE ABOVE HERE
 
 	const [isIntersecting, setIsIntersecting] = useState(false);
 
@@ -19,20 +17,14 @@ export default (target, options) => {
 		}
 		const element = target.current;
 
-		if(once && intersectedRef.current) {
+		if (once && intersectedRef.current) {
 			return;
 		}
 
 		const observer = new IntersectionObserver(
 			([entry]) => {
-				console.log(`useIntersect ${target.current.dataset.test}`);
-				console.log(
-					`useIntersect entry.intersectionRatio ${entry.intersectionRatio}`
-				);
 				setIsIntersecting(entry.isIntersecting);
-				console.log(`useIntersect test ${entry.isIntersecting}`);
 				if (entry.isIntersecting) {
-					console.log('useIntersect IS INTERSECTING');
 					intersectedRef.current = true;
 				}
 				if (entry.isIntersecting && once && element) {
@@ -47,10 +39,10 @@ export default (target, options) => {
 			observer.observe(element);
 		}
 		return () => {
-			if(once) {
+			if (once) {
 				return;
 			}
-			if(element) {
+			if (element) {
 				currentObserver.unobserve(element);
 			}
 		};

@@ -6,19 +6,19 @@ const darkMode = createMuiTheme({
 	palette: {
 		mode: 'dark',
 		background: {
-			default: '#01030F'
+			default: '#01030F',
 		},
 		primary: {
-			main: '#dc0004'
+			main: '#dc0004',
 		},
 		secondary: {
-			main: '#401033'
-		}
+			main: '#401033',
+		},
 	},
 });
 
 const SpecterTheme = (props) => {
-	const { children } = props
+	const { children } = props;
 	return (
 		<ThemeProvider theme={darkMode}>
 			<CssBaseline />
