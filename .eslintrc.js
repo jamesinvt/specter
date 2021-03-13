@@ -15,6 +15,12 @@ module.exports = {
 		},
 	},
 	rules: {
+		"no-restricted-imports": [
+			"error",
+			{
+				"patterns": ["@material-ui/*/*/*", "!@material-ui/core/test-utils/*"]
+			}
+		],
 		// Prefer single quotes for strings
 		quotes: ['error', 'single', { avoidEscape: true }],
 

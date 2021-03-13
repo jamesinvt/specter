@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '@material-ui/core/';
+import { Container, Grid } from '@material-ui/core/';
 import SearchBar from '../../component/SearchBar';
 
 const Home = () => {

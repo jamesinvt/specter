@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
 const Navigation = () => {
 	const classes = useStyles();
 	return (
-		<AppBar position="fixed" color="transparent">
+		// <AppBar position="fixed" color="transparent">
+		<AppBar position="sticky" color="transparent">
 			<Toolbar>
 				<IconButton
 					edge="start"

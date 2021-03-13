@@ -11,25 +11,30 @@ import SpecterTheme from '../theme';
 import Home from '../pages/Home';
 import MovieFullView from '../pages/MovieFullView';
 import NavBar from '../component/Navbar';
+import NotFound from '../pages/NotFound';
+import Search from '../pages/Search';
 const SpecterApp = () => {
 	return (
 		<Router>
 			<SpecterTheme>
-				<Container disableGutters width={1}>
+				<Container disableGutters>
 					<NavBar />
 					<Switch>
-						<Route exact="true" path="/">
+						<Route exact path="/">
 							<Home />
 						</Route>
 						<Route
 							path="/movie/:id"
 							render={(props) => (
-								<MovieFullView
-									{...props}
-									key={props.match.params.id}
-								/>
+								<MovieFullView />
 							)}
 						/>
+						<Route exact path="/search">
+							<Search />
+						</Route>
+						<Route path="*">
+							<NotFound />
+						</Route>
 					</Switch>
 				</Container>
 			</SpecterTheme>

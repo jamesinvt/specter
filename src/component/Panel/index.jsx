@@ -46,7 +46,7 @@ const Panel = ({ panel, group }) => {
 				>
 					{data &&
 						data.results.map((item, index) => (
-							<Link to={`/movie/${item.id}`}>
+							<Link to={`/movie/${item.id}`} key={item.id}>
 								<Movie
 									item={item}
 									isActive={index == currentIndex}

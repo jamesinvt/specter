@@ -5,13 +5,13 @@ const useFetch = (fetchUrl) => {
 	const [error, setError] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	useEffect(() => {
-		const fetchData = async (url) => {
-			if (!url) {
+		(async () => {
+			if (!fetchUrl) {
 				return;
 			}
 			try {
 				setIsLoading(true);
-				const response = await fetch(url);
+				const response = await fetch(fetchUrl);
 				const json = await response.json();
 				if (response.status !== 200) {
 					throw Error(json.message);
@@ -21,8 +21,7 @@ const useFetch = (fetchUrl) => {
 			} catch (e) {
 				setError(e);
 			}
-		};
-		fetchData(fetchUrl);
+		})();
 	}, [fetchUrl]);
 	return { data, error, isLoading };
 };
