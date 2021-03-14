@@ -18,9 +18,8 @@ const Panel = ({ panel, group }) => {
 
 	const target = useRef(null);
 	const inView = useIntersect(target, { once: true, threshold: 0.7 });
-	const { data, error, isLoading } = useFetch(
-		`/remote/test/panel?panel=${panel}&group=${group}`
-	);
+	const [data,setData] = useState([]);
+	const { error, isLoading, get } = useFetch();
 
 	const handleCurrentIndexChange = (index) => {
 		setCurrentIndex(index);
@@ -33,7 +32,15 @@ const Panel = ({ panel, group }) => {
 	// const handleLinkClick = () => {
 	// 	if
 	// };
-	
+	const getMovies = async () => {
+		const results = await get(`/remote/test/panel?panel=${panel}&group=${group}`)
+		console.log({results: results.results})
+		setData(results.results);
+	}
+	useEffect(() => {
+		getMovies();
+	}, [])
+
 	return (
 		<Slide in mountOnEnter>
 			<div className={classes.root} ref={target} data-test={panel}>
@@ -45,7 +52,7 @@ const Panel = ({ panel, group }) => {
 					selectedItemWidth={ITEM_SELECTED_WIDTH}
 				>
 					{data &&
-						data.results.map((item, index) => (
+						data.map((item, index) => (
 							<Link to={`/movie/${item.id}`} key={item.id}>
 								<Movie
 									item={item}
