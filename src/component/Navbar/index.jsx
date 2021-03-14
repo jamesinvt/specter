@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import SearchBar from '../SearchBar';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -38,17 +39,7 @@ const Navigation = () => {
 					News
 				</Typography>
 				<div className={classes.search}>
-					<div className={classes.searchIcon}>
-						<SearchIcon />
-					</div>
-					<InputBase
-						placeholder="Search…"
-						classes={{
-							root: classes.inputRoot,
-							input: classes.inputInput,
-						}}
-						inputProps={{ 'aria-label': 'search' }}
-					/>
+					<SearchBar suggestSearches />
 				</div>
 				<Button>Login</Button>
 			</Toolbar>

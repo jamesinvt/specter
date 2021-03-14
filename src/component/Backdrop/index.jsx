@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const SpecterApp = ({ image }) => {
+const Backdrop = ({ image }) => {
 	const classes = useStyles();
 	return (
 		<div
@@ -36,4 +36,4 @@ const SpecterApp = ({ image }) => {
 	);
 };
 
-export default SpecterApp;
+export default Backdrop;

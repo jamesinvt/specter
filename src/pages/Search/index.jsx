@@ -7,7 +7,7 @@ const Home = () => {
 		<Container width={1}>
 			<Grid container>
 				<Grid item xs={12}>
-					<SearchBar />
+					<SearchBar suggestSearches />
 				</Grid>
 			</Grid>
 		</Container>

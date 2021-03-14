@@ -33,7 +33,7 @@ const Panel = ({ panel, group }) => {
 	// const handleLinkClick = () => {
 	// 	if
 	// };
-
+	
 	return (
 		<Slide in mountOnEnter>
 			<div className={classes.root} ref={target} data-test={panel}>
