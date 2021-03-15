@@ -8,15 +8,21 @@ const useDebounce = (callback, wait) => {
 			clearTimeout(timer.current);
 		}
 	}
-	useEffect(() => cleanUpTimeout, []);
-	return function debouncedCallback(...args) {
-		argsRef.current = args;
-		cleanUpTimeout();
+
+	const setUpTimeout = () => {
 		timer.current = setTimeout(() => {
 			if(argsRef.current) {
 				callback(...argsRef.current)
 			}
 		  }, wait);
+	}
+
+	useEffect(() => cleanUpTimeout, []);
+	
+	return function debouncedCallback(...args) {
+		argsRef.current = args;
+		cleanUpTimeout();
+		setUpTimeout();
 	};
 };
 

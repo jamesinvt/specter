@@ -53,7 +53,7 @@ module.exports = {
 					}
 				},
 				pathRewrite: {
-					'^/remote': '',
+					'^/remote': '/test',
 				},
 			},
 			//   '/t/p': {

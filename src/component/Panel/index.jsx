@@ -29,14 +29,12 @@ const Panel = ({ panel, group }) => {
 		setActiveItem(item);
 	};
 
-	// const handleLinkClick = () => {
-	// 	if
-	// };
 	const getMovies = async () => {
-		const results = await get(`/remote/test/panel?panel=${panel}&group=${group}`)
+		const results = await get(`/remote/panel?panel=${panel}&group=${group}`)
 		console.log({results: results.results})
 		setData(results.results);
 	}
+	
 	useEffect(() => {
 		getMovies();
 	}, [])

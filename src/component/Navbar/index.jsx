@@ -10,6 +10,7 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import SearchBar from '../SearchBar';
 
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
@@ -17,9 +18,12 @@ const useStyles = makeStyles((theme) => ({
 	menuButton: {
 		marginRight: theme.spacing(2),
 	},
-	title: {
-		flexGrow: 1,
-	},
+	search: {
+		minWidth: '200px'
+	}
+	// title: {
+	// 	flexGrow: 1,
+	// }
 }));
 
 const Navigation = () => {

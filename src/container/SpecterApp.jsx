@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Container } from '@material-ui/core/';
-import {
-	createMuiTheme,
-	ThemeProvider,
-	makeStyles,
-	useTheme,
-} from '@material-ui/core/styles';
 import SpecterTheme from '../theme';
 import Home from '../pages/Home';
 import MovieFullView from '../pages/MovieFullView';
 import NavBar from '../component/Navbar';
 import NotFound from '../pages/NotFound';
 import Search from '../pages/Search';
+import useDeviceDetection from '../hooks/useDeviceDetection';
+
+
+
 const SpecterApp = () => {
+	const { screenSize, hasTouchScreen } = useDeviceDetection();
+
 	return (
 		<Router>
 			<SpecterTheme>

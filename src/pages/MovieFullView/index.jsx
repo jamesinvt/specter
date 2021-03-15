@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Container, Grid, makeStyles } from '@material-ui/core/';
 import Backdrop from '../../component/Backdrop';
 import useFetch from '../../hooks/useFetch';
@@ -14,35 +14,44 @@ const MovieFullView = (props) => {
 	// const id = props.match.params.id;
 	const classes = useStyles();
 	const id = '';
-	const { data, error, isLoading } = useFetch(`/remote/test/movie/${id}`);
-	console.log(data)
+	const [movie, setMovie] = useState(0)
+	const { get, error, isLoading } = useFetch();
+	const getMovieDetails = async () => {
+		const results = await get(`/remote/movie/${id}`)
+		console.log({results: results.results})
+		setMovie(results);
+	}
+	useEffect(() => {
+		getMovieDetails();
+	}, [])
+
 	return (
 		<Container className={classes.root}>
-			{data && (
+			{movie && (
 				<Grid container spacing={3}>
 					<Grid item xs={12} style={{ marginTop: '63px' }}>
-						<h2>{data && data.title}</h2>
+						<h2>{movie.title}</h2>
 					</Grid>
 					<Grid item xs={4}>
 						<img
-							src={`https://image.tmdb.org/t/p/w500${data.poster_path}`}
-							alt={data.title}
+							src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+							alt={movie.title}
 							className={classes.image}
 						/>
 					</Grid>
 					<Grid item container xs={8}>
 						<Grid item>
-							{`${data.release_date} - ${data.runtime}min`}
+							{`${movie.release_date} - ${movie.runtime}min`}
 						</Grid>
 						<Grid item xs={12}>
-							{data.overview}
+							{movie.overview}
 						</Grid>
 					</Grid>
 					<Grid item xs={12}>
-						<ActorPanel imgWidth={115} data={data.credits} />
+						<ActorPanel imgWidth={115} data={movie.credits} />
 					</Grid>
 					<Backdrop
-						image={`https://image.tmdb.org/t/p/w500${data.backdrop_path}`}
+						image={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
 					/>
 				</Grid>
 			)}

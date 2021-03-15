@@ -2,19 +2,19 @@ import { useEffect, useRef } from 'react';
 
 const useFetch = (fetchUrl) => {
 	const abortController = useRef();
-  	const abortContollerOptions = useRef();
+  	const abortControllerOptions = useRef();
 	const dataRef = useRef();
 	const errorRef = useRef();
 	const isLoadingRef =  useRef(true);
 	const doFetch = async (url) => {
-		if (!url) {
-			return;
-		}
 		try {
+			if (!url) {
+				return;
+			}
 			abortController.current = new AbortController();
-			abortContollerOptions.current = { signal: abortController.current.signal };
+			abortControllerOptions.current = { signal: abortController.current.signal };
 			isLoadingRef.current = true;
-			const response = await fetch(url, abortContollerOptions.current);
+			const response = await fetch(url, abortControllerOptions.current);
 			const json = await response.json();
 			if (response.status !== 200) {
 				throw Error(json.message);
@@ -31,7 +31,9 @@ const useFetch = (fetchUrl) => {
 	}
 
 	useEffect(() => {
-		return () => abortContoller.current.abort();
+		if(abortController && abortController.current) {
+			return () => abortController.current.abort();
+		}
 	},[fetchUrl])
 
 	return { data: dataRef.current, error: errorRef.current, isLoading: isLoadingRef.current, get: doFetch };
