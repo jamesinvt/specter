@@ -24,7 +24,6 @@ const SearchBar = (props) => {
 			setSearchQuery(e.target.value);
 		}
 	}, 300);
-	
 
 	const handleSubmit = (e) => {
 		if(e.key == "Enter") {

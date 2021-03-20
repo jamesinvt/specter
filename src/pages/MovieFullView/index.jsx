@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import { Container, Grid, makeStyles } from '@material-ui/core/';
+import { Container, Grid, makeStyles, SpeedDial, SpeedDialIcon } from '@material-ui/core/';
 import Backdrop from '../../component/Backdrop';
 import useFetch from '../../hooks/useFetch';
 import ActorPanel from '../../component/ActorPanel';
+import FloatingActions from '../../component/FloatingActions'
 
 const useStyles = makeStyles((theme) => ({
 	image: {
@@ -53,6 +54,7 @@ const MovieFullView = (props) => {
 					<Backdrop
 						image={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
 					/>
+					<FloatingActions />
 				</Grid>
 			)}
 		</Container>
