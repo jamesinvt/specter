@@ -19,7 +19,7 @@ const Panel = ({ panel, group }) => {
 	const target = useRef(null);
 	const inView = useIntersect(target, { once: true, threshold: 0.7 });
 	const [data,setData] = useState([]);
-	const { error, isLoading, get } = useFetch();
+	const request = useFetch('/remote/graphql');
 
 	const handleCurrentIndexChange = (index) => {
 		setCurrentIndex(index);
@@ -30,9 +30,21 @@ const Panel = ({ panel, group }) => {
 	};
 
 	const getMovies = async () => {
-		const results = await get(`/remote/panel?panel=${panel}&group=${group}`)
-		console.log({results: results.results})
-		setData(results.results);
+		// const results = await get(`/remote/panel?panel=${panel}&group=${group}`);
+		const results = await request.query(`
+			query discoverMovies ($sort_by: String) {
+				discoverMovies(searchParams: { sort_by: $sort_by}){
+					results {
+						id
+						title
+						poster_path
+						backdrop_path
+					}
+				}
+			}`, {sort_by: panel});
+			
+		console.log({results: results});
+		setData(results.discoverMovies.results);
 	}
 	
 	useEffect(() => {

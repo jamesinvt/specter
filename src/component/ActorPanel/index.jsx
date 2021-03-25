@@ -22,7 +22,7 @@ const ActorPanel = (props) => {
 			>
 				{data &&
 					data.cast.map((item, index) => (
-						<Link to={`/person/${item.id}`} key={item.cast_id} >
+						<Link to={`/person/${item.id}`} key={item.id} >
 							<Avatar 
 								alt={item.name} 
 								src={`https://image.tmdb.org/t/p/w500${item.profile_path}`}

@@ -1,42 +1,68 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const useFetch = (fetchUrl) => {
 	const abortController = useRef();
   	const abortControllerOptions = useRef();
-	const dataRef = useRef();
-	const errorRef = useRef();
-	const isLoadingRef =  useRef(true);
-	const doFetch = async (url) => {
-		try {
-			if (!url) {
-				return;
+	const [data, setData] = useState(null);
+	const [error, setError] = useState(null);
+	const [isLoading, setIsLoading] =  useState(true);
+	const makeFetch = (method) => {
+		const doFetch = async (requestOptions) => {
+			try {
+				if (!fetchUrl) {
+					return;
+				}
+				
+				const options = { method }
+				if(method === 'POST') {
+					options.headers = { 
+						'Content-Type': 'application/json',
+					}
+				}
+				if(requestOptions.query) {
+					// graphql
+					options.body = JSON.stringify({
+						query: requestOptions.query,
+						variables: requestOptions.variables || {}
+					});
+				}
+				abortController.current = new AbortController();
+				abortControllerOptions.current = { signal: abortController.current.signal };
+				setIsLoading(true)
+				const response = await fetch(fetchUrl, options);
+				const json = await response.json();
+				if (response.status !== 200) {
+					throw Error(json.message);
+				}
+				setData(json.data)
+				setIsLoading(false)
+				return json.data;
+			} catch (e) {
+				if (e.name == 'AbortError') {
+					console.log('request was cancelled');
+				}
+				setError(e);
 			}
-			abortController.current = new AbortController();
-			abortControllerOptions.current = { signal: abortController.current.signal };
-			isLoadingRef.current = true;
-			const response = await fetch(url, abortControllerOptions.current);
-			const json = await response.json();
-			if (response.status !== 200) {
-				throw Error(json.message);
-			}
-			dataRef.current = json.data
-			isLoadingRef.current = false;
-			return dataRef.current;
-		} catch (e) {
-			if (e.name == 'AbortError') {
-				console.log('request was cancelled');
-			}
-			errorRef.current = e;
 		}
+		return doFetch;
 	}
+
+	const post = makeFetch('POST');
+
+	const request = {
+		get: makeFetch('GET'),
+		post,
+		query: (query, variables) => post({ query, variables}),
+		abort: () => controller.current && controller.current.abort(),
+	  };
 
 	useEffect(() => {
 		if(abortController && abortController.current) {
 			return () => abortController.current.abort();
 		}
-	},[fetchUrl])
+	},[])
 
-	return { data: dataRef.current, error: errorRef.current, isLoading: isLoadingRef.current, get: doFetch };
+	return { ...request, isLoading, error, data };
 };
 
 export default useFetch;

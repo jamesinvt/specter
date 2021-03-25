@@ -18,7 +18,7 @@ const SpecterApp = () => {
 		<Router>
 			<SpecterTheme>
 				<Container disableGutters>
-					<NavBar />
+					{/* <NavBar /> */}
 					<Switch>
 						<Route exact path="/">
 							<Home />

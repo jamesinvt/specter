@@ -4,6 +4,7 @@ import Backdrop from '../../component/Backdrop';
 import useFetch from '../../hooks/useFetch';
 import ActorPanel from '../../component/ActorPanel';
 import FloatingActions from '../../component/FloatingActions'
+import { useParams } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
 	image: {
@@ -14,21 +15,43 @@ const useStyles = makeStyles((theme) => ({
 const MovieFullView = (props) => {
 	// const id = props.match.params.id;
 	const classes = useStyles();
-	const id = '';
+	let { id } = useParams();
 	const [movie, setMovie] = useState(0)
-	const { get, error, isLoading } = useFetch();
+	const request = useFetch('/remote/graphql');
+	
 	const getMovieDetails = async () => {
-		const results = await get(`/remote/movie/${id}`)
-		console.log({results: results.results})
-		setMovie(results);
+		const results = await request.query(`
+			query getMovieById($movie_id: Int!) {
+				movie(movie_id: $movie_id, appendToResponse: "videos,credits") {
+					id
+					title,
+					runtime,
+					release_date,
+					overview,
+					backdrop_path,
+					poster_path,
+					credits {
+						cast {
+							id,
+							cast_id
+							profile_path
+							name
+						}
+					}
+				}
+			}`, {movie_id: parseInt(id)}
+		)
+		setMovie(results.movie);
 	}
 	useEffect(() => {
+		console.log('getMovieDetails')
 		getMovieDetails();
+		console.log(request.data)
 	}, [])
 
 	return (
 		<Container className={classes.root}>
-			{movie && (
+			{request.data && ( 
 				<Grid container spacing={3}>
 					<Grid item xs={12} style={{ marginTop: '63px' }}>
 						<h2>{movie.title}</h2>
