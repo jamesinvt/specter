@@ -35,15 +35,12 @@ const Panel = ({ panel, group }) => {
 			query discoverMovies ($sort_by: String) {
 				discoverMovies(searchParams: { sort_by: $sort_by}){
 					results {
-						id
-						title
-						poster_path
-						backdrop_path
+						...MovieDetails	
 					}
 				}
-			}`, {sort_by: panel});
-			
-		console.log({results: results});
+			}
+			${Movie.fragment.searchResult}`, {sort_by: panel}
+		);
 		setData(results.discoverMovies.results);
 	}
 	

@@ -16,13 +16,11 @@ const SearchBar = (props) => {
 	const [ searchSuggestions, setSearchSuggestions ] = useState([]);
 	let history = useHistory();
 	let params = useParams();
-	const  { get, error, isLoading  } = useFetch();
+	// const  { get, error, isLoading  } = useFetch();
 	// const  { data, error, isLoading  } = useFetch(searchQuery ? `/remote/test/search?searchTerm=${searchQuery}` : null);
-
+	const request = useFetch('/remote/graphql');
 	const handleInputChange = useDebounce((e) => {
-		if(e.target.value != searchQuery) {
 			setSearchQuery(e.target.value);
-		}
 	}, 300);
 
 	const handleSubmit = (e) => {
@@ -33,17 +31,34 @@ const SearchBar = (props) => {
 			history.push(`/search?query=${searchQuery}`)
 		}
 	}
-
+	// input SearchParams {
+	// 	page: Int
+	// 	include_adult: Boolean
+	// 	primary_release_year: Int
+	// 	year: Int
+	// 	query: String
+	// 	region: String
+	//   }
 	const getSearchSuggestions = async (queryUrl) => {
-		const results = await get(queryUrl);
-		setSearchSuggestions(results.results);
+		const movies = await request.query(`
+			query searchMovies($query: String!) {
+				search: searchMovies(searchParams: {query: $query}) {
+					results {
+						id
+						title,
+					}
+				}
+			}`, {query: searchQuery}
+		)
+		console.log(movies.search);
+		setSearchSuggestions(movies.search.results);
 	};
 	
 	useEffect(() => {
 		// const queryUrl = searchQuery && `/remote/search/all?searchTerm=${searchQuery}`;
-		if(suggestSearches) {
-			const queryUrl = searchQuery && `/remote/search?searchTerm=${searchQuery}`;
-			getSearchSuggestions(queryUrl);
+		if(suggestSearches && searchQuery) {
+			// const queryUrl = searchQuery && `/remote/search?searchTerm=${searchQuery}`;
+			getSearchSuggestions(searchQuery);
 			return () => setSearchSuggestions([]);
 		} 
 	},[searchQuery])

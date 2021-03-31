@@ -42,9 +42,9 @@ const Navigation = () => {
 				<Typography variant="h6" className={classes.title}>
 					News
 				</Typography>
-				<div className={classes.search}>
+				{/* <div className={classes.search}>
 					<SearchBar suggestSearches />
-				</div>
+				</div> */}
 				<Button>Login</Button>
 			</Toolbar>
 		</AppBar>

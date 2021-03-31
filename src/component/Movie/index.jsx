@@ -68,6 +68,17 @@ const Movie = (props) => {
 	);
 };
 
+Movie.fragment = {
+	searchResult:
+		`fragment MovieDetails on SearchResult {
+			id
+			title
+			poster_path
+			backdrop_path
+		}`
+	
+};
+
 Movie.propTypes = {
 	item: PropTypes.shape({
 		title: PropTypes.string,

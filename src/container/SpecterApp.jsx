@@ -7,6 +7,8 @@ import MovieFullView from '../pages/MovieFullView';
 import NavBar from '../component/Navbar';
 import NotFound from '../pages/NotFound';
 import Search from '../pages/Search';
+import Login from '../pages/Login';
+
 import useDeviceDetection from '../hooks/useDeviceDetection';
 
 
@@ -18,7 +20,7 @@ const SpecterApp = () => {
 		<Router>
 			<SpecterTheme>
 				<Container disableGutters>
-					{/* <NavBar /> */}
+					<NavBar />
 					<Switch>
 						<Route exact path="/">
 							<Home />
@@ -31,6 +33,9 @@ const SpecterApp = () => {
 						/>
 						<Route exact path="/search">
 							<Search />
+						</Route>
+						<Route path="/login">
+							<Login />
 						</Route>
 						<Route path="*">
 							<NotFound />

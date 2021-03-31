@@ -5,8 +5,7 @@ import Panel from '../../component/Panel';
 const Home = () => {
 	return (
 		<Container disableGutters width={1}>
-			<Panel panel="popular.desc" group="streaming" />
-			<Panel panel="trending" group="day" />
+			<Panel panel="popularity.desc" group="streaming" />
 		</Container>
 	);
 };
